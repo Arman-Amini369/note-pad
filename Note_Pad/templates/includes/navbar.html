@@ -1,0 +1,16 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <div class="navbar-nav">
+        <a class="nav-link active" href="{% url 'note:home' %}" style="margin-right: 1400px;">Home</a>
+        <a href="{% url 'note:contact' %}" class="btn btn-primary" style="margin-right: 10px;">Contact Me</a>
+        {% if request.user.is_authenticated %}
+        <a class="btn btn-info" href="{% url 'note:user_info' %}" style="margin-right: 130px;">About You</a>
+
+        <a class="btn btn-danger" href="{% url 'account:user_logout' %}">Logout</a>
+        {% else %}
+        <a class="btn btn-warning" href="{% url 'account:user_register' %}" style="margin-right: 10px;margin-left: 100px;">Register</a>
+        <a class="btn btn-primary" href="{% url 'account:user_login' %}">Login</a>
+        {% endif %}
+      </div>
+    </div>
+</nav>

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>Home Page | Note Pad</title>{% endblock %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+<a class="btn btn-primary" href="{% url 'note:create' %}" style="margin-right: 30px;">Create Note</a><hr /><hr />
+{% for note in notes %}
+    {% if request.user == note.user %}
+    {% if note.is_pin %}
+    <h2><b>Title: {{note.title}}</b></h2>
+    <h4>Pinned</h4>
+    <a href="{% url 'note:detail' note.id %}" class="btn btn-info">Detail</a><hr />
+    
+    {% else %}
+    <h2><b>Title: {{note.title}}</b></h2>
+    <a href="{% url 'note:detail' note.id %}" class="btn btn-info">Detail</a><hr />
+    {% endif %}
+    {% endif %}
+{% endfor %}
+
+{% else %}
+<h1 class="alert alert-danger">For using note pad you have to be authenticated(login required)</h1>
+{% endif %}
+
+
+{% endblock %}
